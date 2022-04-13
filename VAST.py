@@ -11,7 +11,7 @@ class calc:
     def tolerance(self):
         if self.amount <=3:
             return 0.5
-        elif self.amount >=3 and self.amount <10 :
+        elif self.amount >=3 and self.amount <10:
             return 0.1
         elif self.amount >=10 and self.amount <30:
             return 0.12
