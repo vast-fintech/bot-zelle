@@ -147,7 +147,7 @@ def operate():
     #Cancelar transacción
     def cancelar():
         accion_votc = driver.find_element_by_xpath("//div[@class='MuiSelect-root MuiSelect-select MuiSelect-selectMenu MuiInputBase-input MuiInput-input']")
-        time.sleep(4)
+        time.sleep(7)
         action.move_to_element(accion_votc).click().perform()
         time.sleep(1)
         try:
