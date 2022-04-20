@@ -290,13 +290,13 @@ def operate():
                 discrepancy = abs((monto-monto_sheet)/monto)
                 cascade = calc(monto).tolerance()
                 
-                if row['Fecha']==datetime.today().date() and fuzz.ratio((bank_name),str(desk_name))>=67 and discrepancy < cascade:
+                if row['Fecha']==datetime.today().date() and fuzz.ratio(str(bank_name),str(desk_name))>=65 and discrepancy < cascade:
                     print('Transacción encontrada, posteada hoy')
                     print(frame())
                     gapi(3).sheets(frame(),'F',index)
                     confirmar()
                     break
-                elif fuzz.ratio((bank_name),str(desk_name))>=67 and discrepancy < cascade:
+                elif fuzz.ratio(str(bank_name),str(desk_name))>=65 and discrepancy < cascade:
                     print('Transacción encontrada, posteada el',str(row['Fecha']))
                     print(frame())
                     confirmar()
