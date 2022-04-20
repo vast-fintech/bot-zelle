@@ -211,7 +211,6 @@ class gapi:
                 }
                 log.append(data)
         df = pd.DataFrame(log)
-        print(df)
         return df
 
     def lookup(self):
