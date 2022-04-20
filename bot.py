@@ -285,20 +285,13 @@ def operate():
                 cascade = calc(monto).tolerance()
                 
 
-                if row['Fecha']==datetime.today().date() and fuzz.ratio(str(row['Nombre']),str(remitente))>=68 and discrepancy < cascade:
+                if row['Fecha']==datetime.today().date() and fuzz.ratio(str(row['Nombre']),str(remitente))>=69 and discrepancy < cascade:
                     print('Transacción encontrada, posteada hoy')
                     print(frame())
-                    gapi(3).sheets(frame(),'F',index)
-                    confirmar()
-                    break
-                elif fuzz.ratio(str(row['Nombre']),str(remitente))>=68 and discrepancy < cascade:
-                    print('Transacción encontrada, posteada el',str(row['Fecha']))
-                    print(frame())
                     confirmar()
                     gapi(3).sheets(frame(),'F',index)
-
                     break
-                elif fuzz.partial_ratio(str(row['Nombre']),str(remitente))>=68 and discrepancy < cascade:
+                elif fuzz.ratio(str(row['Nombre']),str(remitente))>=69 and discrepancy < cascade:
                     print('Transacción encontrada, posteada el',str(row['Fecha']))
                     print(frame())
                     confirmar()
