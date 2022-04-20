@@ -18,4 +18,4 @@ class calc:
         elif self.amount >=30 and self.amount <60:
             return 0.15
         elif self.amount >=60:
-            return 0.2
+            return 0.05
