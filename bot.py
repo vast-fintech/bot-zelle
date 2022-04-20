@@ -268,7 +268,7 @@ def operate():
                     'Tasa': tasa,
                     'Fecha de cierre': str(datetime.today().date()),
                     'Beneficiario': beneficiario,
-                    'Fullfilment': 'BOT'
+                    'Fullfilment': 'BOT',
                     'Fuzzy Match': str(fuzz.ratio(str(row['Nombre']),str(remitente)))
                 }
                 data_list.append(data)
