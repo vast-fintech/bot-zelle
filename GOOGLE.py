@@ -150,6 +150,12 @@ class gapi:
             'majorDimension' : 'ROWS',
             'values' : entries
         }
+        #Limpiar fila
+        clear = sheets.spreadsheets().values().clear(
+            spreadsheetId = spreadsheet_id,
+            range = 'Log Operaciones!'+str(self.column)+str(last_row)
+        )
+        clear.execute()
         #Exportar datos
         response = sheets.spreadsheets().values().update(
             spreadsheetId = spreadsheet_id,
