@@ -279,6 +279,7 @@ def operate():
             for row in transact_dict:
                 #Preparar nombres
                 bank_name = str(row['Nombre'])
+                desk_name = remitente
                 bank_name_len = (str(row['Nombre']).split(' '))
                 desk_name_len = (remitente.split(' '))
                 if len(bank_name_len) == 4:
