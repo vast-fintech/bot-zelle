@@ -246,10 +246,10 @@ def operate():
                 continue
 
             #Cancelar si lleva mas de 20 minutos
-            # int_timer = int((str(timer).split(':'))[1])
-            # if int_timer>20:
-            #     print('Transacción lleva', timer, 'minutos, procediendo a cancelar')
-            #     cancelar()
+            int_timer = int((str(timer).split(':'))[1])
+            if int_timer>20:
+                print('Transacción lleva', timer, 'minutos, procediendo a cancelar')
+                cancelar()
 
             def frame():
             #Imprimir datos para feedback de user
@@ -283,10 +283,8 @@ def operate():
                 desk_name_len = (remitente.split(' '))
                 if len(bank_name_len) == 4:
                     bank_name = str(str(bank_name_len[0])+' '+str(bank_name_len[2]+' '+str(bank_name_len[3])))
-                    print('bank',bank_name)
                 if len(desk_name_len) == 4:
                     desk_name = str(str(desk_name_len[0])+' '+str(desk_name_len[2]+' '+str(desk_name_len[3])))
-                    print('desk',desk_name)
                 index+=1
                 monto_sheet = float(row['Monto'])
                 discrepancy = abs((monto-monto_sheet)/monto)
