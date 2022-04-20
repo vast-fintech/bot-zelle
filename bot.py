@@ -159,15 +159,24 @@ def operate():
                 continue
             print('Botón encontrado')
             a=1
-        try:
-            item_votc = driver.find_element_by_xpath('///*[@id="menu-"]/div[3]/ul/li[1]')
-            action.move_to_element(item_votc).click().perform()
-        except:
-            item_votc = driver.find_element_by_xpath('//*[@id="menu-"]/div[3]/ul/li[1]')
-            action.move_to_element(item_votc).click().perform()
+        a = 0
+        
+        while a == 0:
+            try:
+                item_votc = driver.find_element_by_xpath('///*[@id="menu-"]/div[3]/ul/li[1]')
+                action.move_to_element(item_votc).click().perform()
+            except:
+                print('Buscando item de cancelación')
+                continue
+            print('item seleccionado')
+            a=1
+            
         time.sleep(1)
-        cancelar = driver.find_element_by_xpath('//*[@id="root"]/div/main/div[1]/div[2]/div/div[3]/table/tbody/tr['+str(last+1)+']/td/div/div/div/div/div[2]/div[2]/div/button')
-        cancelar.click()
+        try:
+            cancelar = driver.find_element_by_xpath('//*[@id="root"]/div/main/div[1]/div[2]/div/div[3]/table/tbody/tr['+str(last+1)+']/td/div/div/div/div/div[2]/div[2]/div/button')
+            cancelar.click()
+        except:
+            driver.quit()
         print('Operación CANCELADA con éxito')
 
     #Cuenta de transacciones
