@@ -250,7 +250,7 @@ def operate():
             if int_timer>20:
                 print('Transacción lleva', timer, 'minutos, procediendo a cancelar')
                 cancelar()
-                continue()
+                continue
 
             def frame():
             #Imprimir datos para feedback de user
