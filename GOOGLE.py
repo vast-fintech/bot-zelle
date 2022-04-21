@@ -207,15 +207,14 @@ class gapi:
         ).execute()
         #Crear Dataframe para iterar
         for i in range(len(names['values'][0])):
-            if str(names['values'][1][i])=='POR PAGAR':
-                data = {
-                    'MsgId':names['values'][0][i],
-                    'Correo':names['values'][2][i],
-                    'Fecha':datetime.strptime(names['values'][3][i],'%d %b %Y %H:%M:%S').date(),
-                    'Nombre':names['values'][4][i],
-                    'Monto':names['values'][5][i]
-                }
-                log.append(data)
+            data = {
+                'MsgId':names['values'][0][i],
+                'Correo':names['values'][2][i],
+                'Fecha':datetime.strptime(names['values'][3][i],'%d %b %Y %H:%M:%S').date(),
+                'Nombre':names['values'][4][i],
+                'Monto':names['values'][5][i]
+            }
+            log.append(data)
         df = pd.DataFrame(log)
         return df
 
