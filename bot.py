@@ -250,6 +250,7 @@ def operate():
             if int_timer>20:
                 print('Transacción lleva', timer, 'minutos, procediendo a cancelar')
                 cancelar()
+                continue()
 
             def frame():
             #Imprimir datos para feedback de user
@@ -294,14 +295,14 @@ def operate():
                 if row['Fecha']==datetime.today().date() and fuzz.ratio(str(bank_name),str(desk_name))>=65 and discrepancy < cascade:
                     print('Transacción encontrada, posteada hoy')
                     print(frame())
-                    gapi(3).sheets(frame(),'G',index)
                     confirmar()
+                    gapi(3).sheets(frame(),'G',index)
                     break
                 elif fuzz.ratio(str(bank_name),str(desk_name))>=65 and discrepancy < cascade:
                     print('Transacción encontrada, posteada el',str(row['Fecha']))
                     print(frame())
-                    gapi(3).sheets(frame(),'G',index)
                     confirmar()
+                    gapi(3).sheets(frame(),'G',index)
                     break
                 elif index == len(transact_dict)+1:
                     #Si no hay match, cuenta las filas, cierra el calim y pasa a la siguiente
