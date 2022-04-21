@@ -90,11 +90,11 @@ class gapi:
                     amount = str((str(msg['payload']['headers'][7]['value']).split('$'))[1]) #Monto
                     data = {
                         'MsgId':message['id'],
+                        'Estatus':'POR PAGAR',
                         'Cuenta':recipient,
                         'Fecha':date,
                         'Remitente':name,
-                        'Monto':amount,
-                        'Estatus':'POR PAGAR'  
+                        'Monto':amount 
                     }
                     data_list.append(data)
         df = pd.DataFrame(data_list)
@@ -207,13 +207,13 @@ class gapi:
         ).execute()
         #Crear Dataframe para iterar
         for i in range(len(names['values'][0])):
-            if str(names['values'][5][i])=='POR PAGAR':
+            if str(names['values'][1][i])=='POR PAGAR':
                 data = {
                     'MsgId':names['values'][0][i],
-                    'Correo':names['values'][1][i],
-                    'Fecha':datetime.strptime(names['values'][2][i],'%d %b %Y %H:%M:%S').date(),
-                    'Nombre':names['values'][3][i],
-                    'Monto':names['values'][4][i]
+                    'Correo':names['values'][2][i],
+                    'Fecha':datetime.strptime(names['values'][3][i],'%d %b %Y %H:%M:%S').date(),
+                    'Nombre':names['values'][4][i],
+                    'Monto':names['values'][5][i]
                 }
                 log.append(data)
         df = pd.DataFrame(log)
