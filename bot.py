@@ -292,17 +292,17 @@ def operate():
                 discrepancy = abs((monto-monto_sheet)/monto)
                 cascade = calc(monto).tolerance()
                 
-                if row['Fecha']==datetime.today().date() and fuzz.ratio(str(bank_name),str(desk_name))>=65 and discrepancy < cascade:
+                if row['Fecha']==datetime.today().date() and fuzz.ratio(str(bank_name),str(desk_name))>=65 and discrepancy < cascade and str(row['Remitente Desk'])!='POR PAGAR':
                     print('Transacción encontrada, posteada hoy')
                     print(frame())
                     confirmar()
-                    gapi(3).sheets(frame(),'G',index)
+                    gapi(3).sheets(frame(),'F',index)
                     break
-                elif fuzz.ratio(str(bank_name),str(desk_name))>=65 and discrepancy < cascade:
+                elif fuzz.ratio(str(bank_name),str(desk_name))>=65 and discrepancy < cascade and str(row['Remitente Desk'])!='POR PAGAR':
                     print('Transacción encontrada, posteada el',str(row['Fecha']))
                     print(frame())
                     confirmar()
-                    gapi(3).sheets(frame(),'G',index)
+                    gapi(3).sheets(frame(),'F',index)
                     break
                 elif index == len(transact_dict)+1:
                     #Si no hay match, cuenta las filas, cierra el calim y pasa a la siguiente
