@@ -169,9 +169,13 @@ def operate():
             print('Item encontrado')
             a=1
 
-        time.sleep(7)
-        cancelar = driver.find_element_by_xpath('//*[@id="root"]/div/main/div[1]/div[2]/div/div[3]/table/tbody/tr['+str(last+1)+']/td/div/div/div/div/div[2]/div[2]/div/button')
-        cancelar.click()
+        time.sleep(2)
+        try:
+            cancelar = driver.find_element_by_xpath('//*[@id="root"]/div/main/div[1]/div[2]/div/div[3]/table/tbody/tr['+str(last+1)+']/td/div/div/div/div/div[2]/div[2]/div/button')
+            cancelar.click()
+        except:
+            cancelar = driver.find_element_by_xpath('//*[@id="root"]/div/main/div[1]/div[2]/div/div[3]/table/tbody/tr['+str(last+1)+']/td/div/div/div/div/div[2]/div[2]/div/button')
+            cancelar.click()
         print('Operación CANCELADA con éxito')
 
     #Cuenta de transacciones
