@@ -27,3 +27,7 @@ def scrape():
         vast = gapi(3).sheets(gt,'A','last')
     except:
         scrape()
+        
+while TRUE:
+    time.sleep(30)
+    scrape()
