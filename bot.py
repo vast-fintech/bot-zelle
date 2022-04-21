@@ -58,7 +58,7 @@ def scrape():
     gt = gapi(2).mail()
     #Vaciado en SHEETS
     vast = gapi(3).sheets(gt,'A','last')
-scrape()
+#scrape()
 
 #Desk Login
 def desk_login():
@@ -310,13 +310,13 @@ def operate():
                     break
                 elif index == len(transact_dict)+1:
                     #Si no hay match, cuenta las filas, cierra el calim y pasa a la siguiente
-                    scrape()
+                    #scrape()
                     print('Transacción no encontrada')
                     print(frame())
                     drop_down.click()
                     offset +=2
         else:
-            scrape()
+            pass
 operate()
              
 
