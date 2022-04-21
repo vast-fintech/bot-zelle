@@ -207,7 +207,7 @@ def operate():
         #Resetear offset
         if offset>(claims-2):
             offset = 0
-            scrape()
+            #scrape()
 
         if claims > 0:
             #Empezar a medir tiempo de operacion
