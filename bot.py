@@ -294,14 +294,14 @@ def operate():
                 if row['Fecha']==datetime.today().date() and fuzz.ratio(str(bank_name),str(desk_name))>=65 and discrepancy < cascade:
                     print('Transacción encontrada, posteada hoy')
                     print(frame())
-                    gapi(3).sheets(frame(),'F',index)
+                    gapi(3).sheets(frame(),'G',index)
                     confirmar()
                     break
                 elif fuzz.ratio(str(bank_name),str(desk_name))>=65 and discrepancy < cascade:
                     print('Transacción encontrada, posteada el',str(row['Fecha']))
                     print(frame())
                     confirmar()
-                    gapi(3).sheets(frame(),'F',index)
+                    gapi(3).sheets(frame(),'G',index)
                     break
                 elif index == len(transact_dict)+1:
                     #Si no hay match, cuenta las filas, cierra el calim y pasa a la siguiente
