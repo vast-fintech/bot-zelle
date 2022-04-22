@@ -280,9 +280,9 @@ def main():
                     desk_name = remitente
                     bank_name_len = (str(row['Nombre']).split(' '))
                     desk_name_len = (remitente.split(' '))
-                    if len(bank_name_len) == 4:
+                    if len(bank_name_len) >= 4:
                         bank_name = str(str(bank_name_len[0])+' '+str(bank_name_len[2]+' '+str(bank_name_len[3])))
-                    if len(desk_name_len) == 4:
+                    if len(desk_name_len) >= 4:
                         desk_name = str(str(desk_name_len[0])+' '+str(desk_name_len[2]+' '+str(desk_name_len[3])))
                     index+=1
                     monto_sheet = float(row['Monto'])
