@@ -209,20 +209,20 @@ def main():
                 time.sleep(1)
                 #Contar el numero de transacciones
                 last = claims - offset - 1 
-                try:
-                    drop_down = WebDriverWait(driver,3).until(
-                        EC.presence_of_element_located((By.XPATH,'//*[@id="root"]//tbody/tr['+str(last)+']/td[8]/button'))
-                    )
-                    drop_down.click()
-                except:
-                    continue
+#                 try:
+                drop_down = WebDriverWait(driver,3).until(
+                    EC.presence_of_element_located((By.XPATH,'//*[@id="root"]//tbody/tr['+str(last)+']/td[8]/button'))
+                )
+                drop_down.click()
+#                 except:
+#                     continue
                 #Datos de primera fila
-                try:
-                    tipo = driver.find_element_by_xpath('//*[@id="root"]/div/main/div[1]/div[2]/div/div[3]/table/tbody/tr['+str(last)+']/td[2]/div').text
-                    banco = driver.find_element_by_xpath('//*[@id="root"]/div/main/div[1]/div[2]/div/div[3]/table/tbody/tr['+str(last)+']/td[3]').text
-                    timer = datetime.strptime(str(driver.find_element_by_xpath("//*[@id='root']//tbody/tr["+str(last)+"]/td[6]//*[name()='svg']").get_attribute('title')).replace('+',''),'%M:%S').time()
-                except:
-                    continue
+#                 try:
+                tipo = driver.find_element_by_xpath('//*[@id="root"]/div/main/div[1]/div[2]/div/div[3]/table/tbody/tr['+str(last)+']/td[2]/div').text
+                banco = driver.find_element_by_xpath('//*[@id="root"]/div/main/div[1]/div[2]/div/div[3]/table/tbody/tr['+str(last)+']/td[3]').text
+                timer = datetime.strptime(str(driver.find_element_by_xpath("//*[@id='root']//tbody/tr["+str(last)+"]/td[6]//*[name()='svg']").get_attribute('title')).replace('+',''),'%M:%S').time()
+#                 except:
+#                     continue
                 
                 #Volver a contar transacciones
                 time.sleep(4)
