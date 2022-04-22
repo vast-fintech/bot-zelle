@@ -55,6 +55,7 @@ def main():
     def handle_exception():
         print('Algo ocurrió pero no te preocupes, me estoy reiniciando')
         driver.quit()
+        time.sleep(2)
         main()
         
 
