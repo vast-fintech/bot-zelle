@@ -42,15 +42,16 @@ chrome_options.add_argument("--no-default-browser-check")
 chrome_options.add_argument("--ignore-certificate-errors")
 chrome_options.add_argument("--start-maximazed")
 
-driver = webdriver.Chrome(executable_path=CHROMEDRIVER_PATH,chrome_options=chrome_options)
-ignored_exceptions=(NoSuchElementException,StaleElementReferenceException)
-
 #Definir ActionChains
 action = ActionChains(driver)
 
 #Definir TimeZone
 tz = timezone('America/Caracas')
 def main():
+    #Llamar al webdriver
+    driver = webdriver.Chrome(executable_path=CHROMEDRIVER_PATH,chrome_options=chrome_options)
+    ignored_exceptions=(NoSuchElementException,StaleElementReferenceException)
+    
     #Manejo de excepciones
     def handle_exception():
         print('Algo ocurrió pero no te preocupes, me estoy reiniciando')
@@ -80,8 +81,8 @@ def main():
         try:
             driver.get(desk_link)
         except:
-            driver.quit()
             print("Link para accesar el portal cambió")
+            handle_exception()
         #Login
         try:
             #Usuario
