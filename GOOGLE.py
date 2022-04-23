@@ -212,7 +212,7 @@ class gapi:
             data = {
                 'MsgId':names['values'][0][i],
                 'Correo':names['values'][1][i],
-                'Fecha':datetime.strptime(names['values'][2][i],'%d %b %Y %H:%M:%S').date(tz),
+                'Fecha':datetime.strptime(names['values'][2][i],'%d %b %Y %H:%M:%S').date(),
                 'Nombre':names['values'][3][i],
                 'Monto':names['values'][4][i],
                 'Remitente Desk':names['values'][5][i]
