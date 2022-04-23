@@ -309,12 +309,15 @@ def main():
                         confirmar()
                         break
                     elif index == len(transact_dict)+1:
-                        #Si no hay match, cuenta las filas, cierra el calim y pasa a la siguiente
-                        #scrape()
-                        print('Transacción no encontrada')
-                        print(frame())
-                        drop_down.click()
-                        offset +=2
+                        try:
+                            #Si no hay match, cuenta las filas, cierra el calim y pasa a la siguiente
+                            #scrape()
+                            print('Transacción no encontrada')
+                            print(frame())
+                            drop_down.click()
+                            offset +=2
+                        except:
+                            handle_exception()
             else:
                 pass
     operate()
