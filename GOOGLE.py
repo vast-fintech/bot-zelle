@@ -3,15 +3,18 @@ from distutils.util import execute
 import pandas as pd
 import numpy as np
 import re
+from pytz import timezone
+from datetime import date, datetime
 import os.path
 import pickle
-from datetime import date, datetime
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
 from googleapiclient.discovery import build
 from googleapiclient.errors import HttpError
 
+#Definir TimeZone
+tz = timezone('America/Caracas')
 
 class gapi:
     def __init__(self, number):
@@ -81,7 +84,6 @@ class gapi:
                             "removeLabelIds": ['UNREAD',str(tag)]
                         }
                     ).execute()
-
 
                     #Datos extraidos
                     recipient = str(msg['payload']['headers'][0]['value']) #Correo receptor
@@ -210,7 +212,7 @@ class gapi:
             data = {
                 'MsgId':names['values'][0][i],
                 'Correo':names['values'][1][i],
-                'Fecha':datetime.strptime(names['values'][2][i],'%d %b %Y %H:%M:%S').date(),
+                'Fecha':datetime.strptime(names['values'][2][i],'%d %b %Y %H:%M:%S').date(tz),
                 'Nombre':names['values'][3][i],
                 'Monto':names['values'][4][i],
                 'Remitente Desk':names['values'][5][i]
@@ -275,14 +277,3 @@ class gapi:
                 "removeLabelIds": ['UNREAD']
             }
         ).execute()
-    
-
-
-
-
-
-
-
-
-        
-
