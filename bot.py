@@ -42,15 +42,15 @@ chrome_options.add_argument("--no-default-browser-check")
 chrome_options.add_argument("--ignore-certificate-errors")
 chrome_options.add_argument("--start-maximazed")
 
-#Definir ActionChains
-action = ActionChains(driver)
-
 #Definir TimeZone
 tz = timezone('America/Caracas')
 def main():
     #Llamar al webdriver
     driver = webdriver.Chrome(executable_path=CHROMEDRIVER_PATH,chrome_options=chrome_options)
     ignored_exceptions=(NoSuchElementException,StaleElementReferenceException)
+    
+    #Definir ActionChains
+    action = ActionChains(driver)
     
     #Manejo de excepciones
     def handle_exception():
