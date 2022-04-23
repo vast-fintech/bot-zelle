@@ -20,12 +20,9 @@ def scrape():
     #Llamadas al API
     try:
         gt = gapi(2).mail()
-    except:
-        scrape()
-    #Vaciado en SHEETS
-    try:
         vast = gapi(3).sheets(gt,'A','last')
     except:
+        time.sleep(2)
         scrape()
         
 while TRUE:
