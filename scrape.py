@@ -18,19 +18,14 @@ warnings.filterwarnings("ignore", category=DeprecationWarning)
 #Jalada de correos a sheets
 def scrape():
     #Llamadas al API
- try:
-    gt = gapi(2).mail()
-    gapi(3).sheets(gt,'A','last')
-    gapi(2).read()
- except:
-     time.sleep(2)
-     scrape()
- try:
-    gapi(2).read()
- except:
-     time.sleep(2)
-     scrape()
+    try:
+        gt = gapi(2).mail()
+        gapi(3).sheets(gt,'A','last')
+        gapi(2).read()
+    except:
+        time.sleep(2)
+        scrape()
         
 while TRUE:
-    time.sleep(1)
+    time.sleep(20)
     scrape()
