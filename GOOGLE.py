@@ -85,7 +85,7 @@ class gapi:
                         'MsgId':message['id'],
                         'Cuenta':recipient,
                         'Fecha':str(str(datetime.strptime(date,' %d %b %Y %H:%M:%S ') + timedelta(hours=3)).split('.')[0]),
-                        'Hora':str(datetime.strptime(date,' %d %b %Y %H:%M:%S ').time() + timedelta(hours=3)),
+                        'Hora':str((datetime.strptime(date,' %d %b %Y %H:%M:%S ') + timedelta(hours=3)).time()),
                         'Remitente':name,
                         'Monto':amount,
                         'Remitente Desk':'POR PAGAR'
