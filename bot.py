@@ -74,9 +74,12 @@ def main():
         #Bienvenida
         print("Hola operardor VAST, soy tu BOT ZELLE, en breves momentos empezaré a operar.")           
         #Solicitar credenciales
-        desk_link = gapi(3).credentials('link')
-        user = gapi(3).credentials('user')
-        password = gapi(3).credentials('password')
+        try:
+            desk_link = gapi(3).credentials('link')
+            user = gapi(3).credentials('user')
+            password = gapi(3).credentials('password')
+        except:
+            handle_exception()
 
         #Inicio de sesion DESK
         try:
