@@ -75,15 +75,6 @@ class gapi:
                         format='metadata',
                         metadataHeaders=['Delivered-To','Received','Subject']
                     ).execute()
-                    #Marcar como leido
-                    # results = gmail.users().messages().modify(
-                    #     userId='me',
-                    #     id=message['id'],
-                    #     body={
-                    #         "addLabelIds": [],
-                    #         "removeLabelIds": ['UNREAD',str(tag)]
-                    #     }
-                    # ).execute()
 
                     #Datos extraidos
                     recipient = str(msg['payload']['headers'][0]['value']) #Correo receptor
@@ -102,7 +93,6 @@ class gapi:
                     data_list.append(data)
         df = pd.DataFrame(data_list)
         print('Correos recogidos')
-        print(df)
         return(df)
 
     def read(self):
