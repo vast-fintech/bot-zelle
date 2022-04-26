@@ -172,7 +172,7 @@ def main():
             a = 0
             while a == 0:
                 try:
-                    item_votc = driver.find_element_by_xpath('//*[@id="menu-"]/div[3]/ul/li[6]')
+                    item_votc = driver.find_element_by_xpath('//*[@id="menu-"]/div[3]/ul/li[1]')
                     item_votc.click()
                 except:
                     print('Buscando item de cancelación')
