@@ -21,6 +21,10 @@ def scrape():
     try:
         gt = gapi(2).mail()
         gapi(3).sheets(gt,'A','last')
+    except:
+        time.sleep(2)
+        scrape()
+    try:
         gapi(2).read()
     except:
         time.sleep(2)
