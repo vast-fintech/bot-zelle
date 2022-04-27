@@ -223,13 +223,16 @@ def main():
                 except:
                     continue
                 #Datos de primera fila
-#                 try:
-                tipo = driver.find_element_by_xpath('//*[@id="root"]/div/main/div[1]/div[2]/div/div[3]/table/tbody/tr['+str(last)+']/td[2]/div').text
-                banco = driver.find_element_by_xpath('//*[@id="root"]/div/main/div[1]/div[2]/div/div[3]/table/tbody/tr['+str(last)+']/td[3]').text
-                timer = str(driver.find_element_by_xpath("//*[@id='root']//tbody/tr["+str(last)+"]/td[6]//*[name()='svg']").get_attribute('title')).replace('+','')
-#                 except:
-#                     print('No se pudo recoger los datos de primera fila')
-#                     continue
+                try:
+                    tipo = driver.find_element_by_xpath('//*[@id="root"]/div/main/div[1]/div[2]/div/div[3]/table/tbody/tr['+str(last)+']/td[2]/div').text
+                    banco = driver.find_element_by_xpath('//*[@id="root"]/div/main/div[1]/div[2]/div/div[3]/table/tbody/tr['+str(last)+']/td[3]').text
+                except:
+                    continue
+                try: 
+                    timer = str(driver.find_element_by_xpath("//*[@id='root']//tbody/tr["+str(last)+"]/td[6]//*[name()='svg']").get_attribute('title')).replace('+','')
+                except:
+                    print('No se pudo recoger el timer')
+                    pass
                 
                 #Volver a contar transacciones
                 time.sleep(4)
