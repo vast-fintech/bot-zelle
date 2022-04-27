@@ -101,8 +101,10 @@ class gapi:
                     }
                     data_list.append(data)
         df = pd.DataFrame(data_list)
-        print('Correos recogidos')
-        print(df)
+        if df.empty == True:
+            print('Nada nuevo')
+        else:
+            print('Correos recogidos')
         return(df)
 
     def read(self):
@@ -181,13 +183,7 @@ class gapi:
         data_list= []
         data = emails.to_dict('Records')
         for r in data:
-            if row=='last':
-                if r['MsgId'] not in log:
-                    #Crear lista a introducir en sheets
-                    data_list.append(r)
-            else:
-                data_list.append(r)
-
+            data_list.append(r)
 
         df = pd.DataFrame(data_list)
         entries = df.T.reset_index().T.values.tolist() #Trasponer Dataframe para exportar a sheets
