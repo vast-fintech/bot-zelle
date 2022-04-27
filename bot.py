@@ -253,11 +253,11 @@ def main():
                     continue
 
                 #Cancelar si lleva mas de 20 minutos
-#                 int_timer = int((timer.split(':'))[0])
-#                 if int_timer>20:
-#                     print('Transacción lleva', timer, 'minutos, procediendo a cancelar')
-#                     cancelar()
-#                     continue
+                int_timer = int((timer.split(':'))[0])
+                if int_timer>20:
+                    print('Transacción lleva', timer, 'minutos, procediendo a cancelar')
+                    cancelar()
+                    continue
 
                 def frame():
                 #Imprimir datos para feedback de user
