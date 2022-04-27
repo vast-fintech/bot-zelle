@@ -28,7 +28,7 @@ def scrape():
         gapi(2).read(gt)
         
 while TRUE:
-    time.sleep(1)
+    time.sleep(10)
     try:
         scrape()
     except:
