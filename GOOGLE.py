@@ -100,8 +100,7 @@ class gapi:
             print(df)
         return(df)
         
-    def read(self, emails):
-        self.emails = emails
+    def read(self):
         #Llamar al API
         self.call()
         #Servicio del API
@@ -113,7 +112,6 @@ class gapi:
         ).execute()
         labels = results.get('labels',[])
 
-        data = emails.to_dict()
         #Extraer LabelId
         for label in labels:
             if label['name'] == 'PENDIENTE':
@@ -128,18 +126,15 @@ class gapi:
                 ).execute()
                 messages = results.get('messages', [])
                 for message in messages:
-                    for r in data:
-                        print(str(r['MsgId']), '/' ,str(message['id']))
-                        if str(r['MsgId']) == str(message['id']):
-                            #Marcar como leido
-                            results = gmail.users().messages().modify(
-                                userId='me',
-                                id=message['id'],
-                                body={
-                                    "addLabelIds": [],
-                                    "removeLabelIds": ['UNREAD',str(tag)]
-                                }
-                            ).execute()
+                    #Marcar como leido
+                    results = gmail.users().messages().modify(
+                        userId='me',
+                        id=message['id'],
+                        body={
+                            "addLabelIds": [],
+                            "removeLabelIds": ['UNREAD',str(tag)]
+                        }
+                    ).execute()
 
     def sheets(self, emails, column, row):
         self.emails = emails
