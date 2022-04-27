@@ -129,7 +129,8 @@ class gapi:
                 messages = results.get('messages', [])
                 for message in messages:
                     for r in data:
-                        if r['MsgId'] == message['id']:
+                        print(str(r['MsgId']), '/' ,str(message['id']))
+                        if str(r['MsgId']) == str(message['id']):
                             #Marcar como leido
                             results = gmail.users().messages().modify(
                                 userId='me',
