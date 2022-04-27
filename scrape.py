@@ -25,7 +25,7 @@ def scrape():
     except Exception as e:
         error = e
     if error is None:
-        gapi(2).read(gt)
+        gapi(2).read()
         
 while TRUE:
     time.sleep(10)
