@@ -76,7 +76,6 @@ class gapi:
                         metadataHeaders=['Delivered-To','Received','Subject']
                     ).execute()
 
-
                     #Datos extraidos
                     recipient = str(msg['payload']['headers'][0]['value']) #Correo receptor
                     date = str((re.split(',|-|\n',str(msg['payload']['headers'][1]['value'])))[1]) #Fecha
@@ -100,7 +99,8 @@ class gapi:
             print(df)
         return(df)
         
-    def read(self):
+    def read(self, emails):
+        self.emails = emails
         #Llamar al API
         self.call()
         #Servicio del API
@@ -112,6 +112,7 @@ class gapi:
         ).execute()
         labels = results.get('labels',[])
 
+        data = emails.to_dict('Records')
         #Extraer LabelId
         for label in labels:
             if label['name'] == 'PENDIENTE':
@@ -126,15 +127,17 @@ class gapi:
                 ).execute()
                 messages = results.get('messages', [])
                 for message in messages:
-                    #Marcar como leido
-                    results = gmail.users().messages().modify(
-                        userId='me',
-                        id=message['id'],
-                        body={
-                            "addLabelIds": [],
-                            "removeLabelIds": ['UNREAD',str(tag)]
-                        }
-                    ).execute()
+                    for r in data:
+                        if str(r['MsgId']) == str(message['id']):
+                            #Marcar como leido
+                            results = gmail.users().messages().modify(
+                                userId='me',
+                                id=message['id'],
+                                body={
+                                    "addLabelIds": [],
+                                    "removeLabelIds": ['UNREAD',str(tag)]
+                                }
+                            ).execute()
 
     def sheets(self, emails, column, row):
         self.emails = emails
@@ -172,7 +175,6 @@ class gapi:
 
 
         df = pd.DataFrame(data_list)
-        print(df)
         entries = df.T.reset_index().T.values.tolist() #Trasponer Dataframe para exportar a sheets
         del entries[0] #Borrar headers de DataFrame
 
@@ -337,14 +339,3 @@ class gapi:
                 "removeLabelIds": ['UNREAD']
             }
         ).execute()
-    
-
-
-
-
-
-
-
-
-        
-
