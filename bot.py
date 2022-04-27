@@ -226,7 +226,7 @@ def main():
                 try:
                     tipo = driver.find_element_by_xpath('//*[@id="root"]/div/main/div[1]/div[2]/div/div[3]/table/tbody/tr['+str(last)+']/td[2]/div').text
                     banco = driver.find_element_by_xpath('//*[@id="root"]/div/main/div[1]/div[2]/div/div[3]/table/tbody/tr['+str(last)+']/td[3]').text
-                    timer = datetime.strptime(str(driver.find_element_by_xpath("//*[@id='root']//tbody/tr["+str(last)+"]/td[6]//*[name()='svg']").get_attribute('title')).replace('+',''),'%M:%S').time()
+#                     timer = datetime.strptime(str(driver.find_element_by_xpath("//*[@id='root']//tbody/tr["+str(last)+"]/td[6]//*[name()='svg']").get_attribute('title')).replace('+',''),'%M:%S').time()
                 except:
                     continue
                 
@@ -249,11 +249,11 @@ def main():
                     continue
 
                 #Cancelar si lleva mas de 20 minutos
-                int_timer = int((str(timer).split(':'))[1])
-                if int_timer>20:
-                    print('Transacción lleva', timer, 'minutos, procediendo a cancelar')
-                    cancelar()
-                    continue
+#                 int_timer = int((str(timer).split(':'))[1])
+#                 if int_timer>20:
+#                     print('Transacción lleva', timer, 'minutos, procediendo a cancelar')
+#                     cancelar()
+#                     continue
 
                 def frame():
                 #Imprimir datos para feedback de user
