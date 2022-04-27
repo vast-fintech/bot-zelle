@@ -58,7 +58,7 @@ class gapi:
         for label in labels:
             if label['name'] == 'PENDIENTE':
                 tag=label['id']
-                print('Etiqueta', label['name'], 'encontrada', tag)
+                print('Etiqueta', label['name'], 'encontrada')
 
                 #Filtrar mensajes por lable y no leidos
                 results = gmail.users().messages().list(
@@ -75,15 +75,7 @@ class gapi:
                         format='metadata',
                         metadataHeaders=['Delivered-To','Received','Subject']
                     ).execute()
-                    #Marcar como leido
-                    # results = gmail.users().messages().modify(
-                    #     userId='me',
-                    #     id=message['id'],
-                    #     body={
-                    #         "addLabelIds": [],
-                    #         "removeLabelIds": ['UNREAD',str(tag)]
-                    #     }
-                    # ).execute()
+
 
                     #Datos extraidos
                     recipient = str(msg['payload']['headers'][0]['value']) #Correo receptor
@@ -105,9 +97,11 @@ class gapi:
             print('Nada nuevo')
         else:
             print('Correos recogidos')
+            print(df)
         return(df)
-
-    def read(self):
+        
+    def read(self, emails):
+        self.emails = emails
         #Llamar al API
         self.call()
         #Servicio del API
@@ -118,8 +112,8 @@ class gapi:
             userId='me'
         ).execute()
         labels = results.get('labels',[])
-        
-        data_list = []
+
+        data = emails.to_dict()
         #Extraer LabelId
         for label in labels:
             if label['name'] == 'PENDIENTE':
@@ -133,23 +127,18 @@ class gapi:
                     q='is:unread'
                 ).execute()
                 messages = results.get('messages', [])
-                #Extraer metadata
                 for message in messages:
-                    msg = gmail.users().messages().get(
-                        userId='me', 
-                        id=message['id'],  
-                        format='metadata',
-                        metadataHeaders=['Delivered-To','Received','Subject']
-                    ).execute()
-                    #Marcar como leido
-                    results = gmail.users().messages().modify(
-                        userId='me',
-                        id=message['id'],
-                        body={
-                            "addLabelIds": [],
-                            "removeLabelIds": ['UNREAD',str(tag)]
-                        }
-                    ).execute()
+                    for r in data:
+                        if r['MsgId'] == message['id']:
+                            #Marcar como leido
+                            results = gmail.users().messages().modify(
+                                userId='me',
+                                id=message['id'],
+                                body={
+                                    "addLabelIds": [],
+                                    "removeLabelIds": ['UNREAD',str(tag)]
+                                }
+                            ).execute()
 
     def sheets(self, emails, column, row):
         self.emails = emails
@@ -166,7 +155,7 @@ class gapi:
         rows_sheets = sheets.spreadsheets().values().get(
             spreadsheetId = spreadsheet_id,
             majorDimension = 'ROWS',
-            range = 'Log Operaciones!A1:A'
+            range = 'Log Operaciones!A2:A'
         ).execute()
         #Crear lista con MsgId ya existentes
         log = []
@@ -174,7 +163,7 @@ class gapi:
             log.append(rows_sheets['values'][i][0])
         #Encontrar última fila en el log
         if row=='last':
-            last_row = (len(rows_sheets['values']))+1
+            last_row = (len(rows_sheets['values']))+2
             print("Ultima fila con datos en el log:",last_row)
         else:
             last_row = row
@@ -185,7 +174,9 @@ class gapi:
         for r in data:
             data_list.append(r)
 
+
         df = pd.DataFrame(data_list)
+        print(df)
         entries = df.T.reset_index().T.values.tolist() #Trasponer Dataframe para exportar a sheets
         del entries[0] #Borrar headers de DataFrame
 
@@ -194,12 +185,6 @@ class gapi:
             'majorDimension' : 'ROWS',
             'values' : entries
         }
-        #Limpiar fila
-        clear = sheets.spreadsheets().values().clear(
-            spreadsheetId = spreadsheet_id,
-            range = 'Log Operaciones!'+str(self.column)+str(last_row)
-        )
-        clear.execute()
         #Exportar datos
         response = sheets.spreadsheets().values().update(
             spreadsheetId = spreadsheet_id,
