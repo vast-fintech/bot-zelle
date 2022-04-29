@@ -135,6 +135,7 @@ def main():
                     )
                     confirmacion.click()
                 except:
+                    handle_exception()
             else:
                 try:
                     completar_entrada =driver.find_element_by_xpath("//button[@class='MuiButtonBase-root MuiButton-root MuiButton-contained']")
