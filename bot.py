@@ -121,30 +121,33 @@ def main():
     def operate():
         #Confirmar transacción
         def confirmar():
-            if monto != monto_sheet:
-                #Corregir monto si hay discrepancia
-                print("Discrepancia encontrada en el monto, procediendo a corregir")
-                time.sleep(1)
-                discrepancia = WebDriverWait(driver,5).until(
-                    EC.presence_of_element_located((By.XPATH,'//*[@id="root"]/div/main/div[1]/div[2]/div/div[3]/table/tbody/tr['+str(last+1)+']/td/div/div/div/div/div[2]/div[1]/div[2]/div[1]/button'))
-                )
-                discrepancia.click()
-                time.sleep(1)
-                correccion = WebDriverWait(driver,5).until(
-                    EC.presence_of_element_located((By.XPATH,"//input[@class='MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense']"))
-                )
-                correccion.send_keys(str(monto_sheet).replace('.',','))
-                #Completar entrada
-                completar_entrada = WebDriverWait(driver,5).until(
-                    EC.presence_of_element_located((By.XPATH,"//button[@class='MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary']"))
-                )
-                action.move_to_element(completar_entrada)
-                completar_entrada.click()
-                #Seguro?
-                confirmacion=WebDriverWait(driver,5).until(
-                    EC.presence_of_element_located((By.XPATH,'/html/body/div[3]/div[3]/div/div[3]/button[2]'))
-                )
-                confirmacion.click()
+            try: 
+                if monto != monto_sheet:
+                    #Corregir monto si hay discrepancia
+                    print("Discrepancia encontrada en el monto, procediendo a corregir")
+                    time.sleep(1)
+                    discrepancia = WebDriverWait(driver,5).until(
+                        EC.presence_of_element_located((By.XPATH,'//*[@id="root"]/div/main/div[1]/div[2]/div/div[3]/table/tbody/tr['+str(last+1)+']/td/div/div/div/div/div[2]/div[1]/div[2]/div[1]/button'))
+                    )
+                    discrepancia.click()
+                    time.sleep(1)
+                    correccion = WebDriverWait(driver,5).until(
+                        EC.presence_of_element_located((By.XPATH,"//input[@class='MuiInputBase-input MuiOutlinedInput-input MuiInputBase-inputMarginDense MuiOutlinedInput-inputMarginDense']"))
+                    )
+                    correccion.send_keys(str(monto_sheet).replace('.',','))
+                    #Completar entrada
+                    completar_entrada = WebDriverWait(driver,5).until(
+                        EC.presence_of_element_located((By.XPATH,"//button[@class='MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary']"))
+                    )
+                    action.move_to_element(completar_entrada)
+                    completar_entrada.click()
+                    #Seguro?
+                    confirmacion=WebDriverWait(driver,5).until(
+                        EC.presence_of_element_located((By.XPATH,'/html/body/div[3]/div[3]/div/div[3]/button[2]'))
+                    )
+                    confirmacion.click()
+                except:
+                    handle_exception()
             else:
                 try:
                     completar_entrada =driver.find_element_by_xpath("//button[@class='MuiButtonBase-root MuiButton-root MuiButton-contained']")
