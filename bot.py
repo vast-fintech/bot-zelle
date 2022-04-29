@@ -120,9 +120,9 @@ def main():
     #Operar
     def operate():
         #Confirmar transacción
-        def confirmar():
-            try: 
-                if monto != monto_sheet:
+        def confirmar(): 
+            if monto != monto_sheet:
+                try:
                     #Corregir monto si hay discrepancia
                     print("Discrepancia encontrada en el monto, procediendo a corregir")
                     time.sleep(1)
