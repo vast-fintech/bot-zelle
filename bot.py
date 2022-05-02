@@ -287,12 +287,12 @@ def main():
                     #Reordenar si el nombre tiene más de 4 elementos
                     if len(bank_name_ls) >= 4:
                         bank_name = str(str(bank_name_ls[0])+' '+str(bank_name_ls[2]+' '+str(bank_name_ls[3])))
-                        bank_name2 = str(str(bank_name_ls[0])+' '+str(bank_name_ls[1]+' '+str(bank_name_ls[3])))
+                        bank_name2 = str(str(bank_name_ls[0])+' '+str(bank_name_ls[1]+' '+str(bank_name_ls[2])))
                     else:
                         bank_name2 = bank_name
                     if len(desk_name_ls) >= 4:
                         desk_name = str(str(desk_name_ls[0])+' '+str(desk_name_ls[2]+' '+str(desk_name_ls[3])))
-                        desk_name2 = str(str(desk_name_ls[0])+' '+str(desk_name_ls[1]+' '+str(desk_name_ls[3])))
+                        desk_name2 = str(str(desk_name_ls[0])+' '+str(desk_name_ls[1]+' '+str(desk_name_ls[2])))
                     else:
                         desk_name2 = desk_name
                     #Parametros de comparación    
